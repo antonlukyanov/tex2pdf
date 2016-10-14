@@ -39,7 +39,7 @@ Options
         By default latex2pdf.sh automatically cleans all the mess that pdflatex produces, but you
         can disable such behaviour by providing this option.
 
-    -d, --debug
+    --debug
         By default latex2pdf.sh hides details of compilation and you cannot see any errors or
         warnings - it saves everything to build.log inside build directory. If you need to see all
         the process of compilation, then supply this option.
