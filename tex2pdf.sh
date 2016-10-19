@@ -100,10 +100,10 @@ else
     build_dir="$wd/$opt_build_dir"
 fi
 latex_logfile="build.log"
-latex_opts="-output-directory=$build_dir"
+latex_opts="-output-directory=\"$build_dir\""
 
 if [[ $opt_debug == false ]]; then
-    redirect=">>$build_dir/$latex_logfile 2>&1"
+    redirect=">>\"$build_dir/$latex_logfile\" 2>&1"
 else
     redirect=
 fi
@@ -117,19 +117,19 @@ cmd_build_dir() {
     if [[ "$opt_build_dir" != '.' ]]; then
         if [ ! -d "$build_dir" ]; then
             echo '--> Creating build directory'
-            eval "mkdir $build_dir"
+            mkdir "$build_dir"
         fi
     fi
 }
 
 cmd_logfile() {
     echo '--> Creating log file'
-    echo '' > $build_dir/$latex_logfile
+    echo '' > "$build_dir/$latex_logfile"
 }
 
 cmd_compile() {
     echo "--> Running $texc"
-    eval "$texc $latex_opts $opt_input $redirect"
+    eval "$texc $latex_opts \"$opt_input\" $redirect"
 }
 
 cmd_bibtex() {
@@ -142,8 +142,8 @@ cmd_remove_temporary() {
     exts=( aux log nav out snm toc bbl blg )
     for ext in "${exts[@]}"; do
         file="$build_dir/$input_filename.$ext"
-        if [ -f $file ]; then
-            rm $file
+        if [ -f "$file" ]; then
+            rm "$file"
         fi
     done
 }
@@ -152,10 +152,10 @@ cmd_mv_output() {
     default_output=$input_filename'.pdf'
     if [[ $opt_output != false ]]; then
         echo '--> Moving pdf'
-        output=$opt_output
+        output="$opt_output"
         mv "$build_dir/$default_output" "$opt_output"
     else
-        output=$default_output
+        output="$opt_build_dir/$default_output"
     fi
 }
 
