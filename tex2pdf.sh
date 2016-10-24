@@ -6,12 +6,13 @@
 printhelp() {
     local script=$(basename "$0")
 cat <<EOF
-latex2pdf.sh just compiles your document into pdf file and cleans up all the mess of pdflatex.
+latex2pdf.sh compiles your LaTeX document into pdf file and cleans up all the mess of pdflatex.
 
-   - It can automatically create build directory where it may keep temporary files
-     and resulting pdf (add --save-temporary flag to save temporary files in build directory).
+   - It can automatically create build directory where it keeps temporary files
+     and resulting pdf.
 
-   - Build directory will be automatically cleaned (by default).
+   - Build directory will be automatically cleaned by default (add --save-temporary flag to keep
+     temporary files in build directory).
 
    - If you use bibliography file, just add '--bibliography' option and it
      will correctly compile your pdf file.
@@ -31,8 +32,8 @@ Options
         Determines into which file the result of compilation will be saved. Note, that by default it
         is relative to the current working directory
 
-    -b, -bibliography
-        If you use bibliography in your LaTeX document you can supply this option to the script and
+    -b, --bibliography
+        If you use bibliography in your LaTeX document you can provide this option to the script and
         it will run a few more commands.
 
     -t, --save-temporary
@@ -42,7 +43,7 @@ Options
     --debug
         By default latex2pdf.sh hides details of compilation and you cannot see any errors or
         warnings - it saves everything to build.log inside build directory. If you need to see all
-        the process of compilation, then supply this option.
+        the process of compilation, then provide this option to the script.
 EOF
 }
 
@@ -161,7 +162,7 @@ cmd_mv_output() {
 
 cmd_bye() {
     echo '--> Build log has been saved to:' $opt_build_dir/$latex_logfile
-    echo '--> File has been saved to:' $output
+    echo '--> PDF has been saved to:' $output
 }
 
 commands=(
